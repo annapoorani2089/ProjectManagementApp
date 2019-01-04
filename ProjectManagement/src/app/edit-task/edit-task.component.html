@@ -1,0 +1,176 @@
+<form class="form-horizontal" method="post">
+  <div class="row">
+    <div class="form-group">
+      <label for="project_name" class="col-sm-1">Project:</label>
+      <div class="col-sm-6">
+        <input type="text" name="project_name" id="project_name" readonly class="col-sm-4 form-control" [(ngModel)]="taskModel.Project.project1" />
+        <input type="hidden" id="hdnproject" name="hdnproject" [(ngModel)]="taskModel.project_id" />
+      </div>
+      <div class="col-sm-2">
+      </div>
+      <div class="col-sm-3">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group">
+      <label for="task_name" class="col-sm-1">Task:</label>
+      <div class="col-sm-6">
+        <input type="text" name="task_name" id="task_name" class="col-sm-4 form-control" [(ngModel)]="taskModel.task1" />
+      </div>
+      <div class="col-sm-5">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-7">
+        <input type="checkbox" class="form-check-input col-sm-1" id="parentTask" name="parentTask" #chkEnable ng-model="" />
+        <label for="parentTask" class="form-check-label col-sm-4">Parent Task</label>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group">
+      <label for="priority" class="col-sm-1">Priority:</label>
+      <div class="col-sm-6">
+        <input type="range" name="priority" id="priority" min="0" max="30" value="0" data-show-value="true" oninput="rangeOutput.value = priority.value"
+          class="col-sm-4 slider inputStyle" [(ngModel)]="taskModel.priority" />
+        <output id="rangeOutput" name="rangeOutput" onloadstart="0" style="padding-top: 0px !important"></output>
+      </div>
+      <div class="col-sm-4"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group">
+      <label for="parent_task" class="col-sm-1">Parent Task:</label>
+      <div class="col-sm-6">
+        <input type="text" name="parent_task" id="parent_task" readonly class="col-sm-4 form-control" [ngModel]="taskModel.parent_task!=null?taskModel.parent_task.parent_task1:null" />
+        <input type="hidden" name="hdnParenttask" id="hdnParentTask" [(ngModel)]="taskModel.parent_id" />
+      </div>
+      <div class="col-sm-2">
+        <input type="button" class="btn btn-secondary" value="search" data-toggle="modal" data-target="#taskModal"
+          (click)="GetAllParentTask()">
+      </div>
+      <div class="col-sm-3">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group">
+      <label for="task_name" class="col-sm-1">Start Date:</label>
+      <div class="form-group col-sm-2" style="margin-right:5px">
+        <input type="date" id="start_date" name="start_date" placeholder="start date" class="col-sm-1 form-control"
+          #startDate [ngModel]="taskModel.start_date | date:'yyyy-MM-dd'" (change)="SetStartDate(startDate.value)" />
+      </div>
+      <label for="task_name" class="col-sm-1">End Date:</label>
+      <div class="form-group col-sm-2" style="margin-right:5px">
+        <input type="date" id="end_date" name="end_date" placeholder="End date" class="col-sm-1 form-control" #endDate
+          #endDate [ngModel]="taskModel.end_date | date:'yyyy-MM-dd'" (change)="SetEndDate(endDate.value)" />
+      </div>
+      <div class="col-sm-6">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group">
+      <label for="user_name" class="col-sm-1">User:</label>
+      <div class="col-sm-6">
+        <input type="text" name="user_name" readonly id="user_name" class="col-sm-4 form-control" [ngModel]="taskModel.users.length>0? taskModel.users[0].first_name:null" />
+        <input type="hidden" name="user_id" id="user_id" [(ngModel)]="taskModel.user_id" />
+      </div>
+      <div class="col-sm-2">
+        <input type="button" class="btn btn-secondary" value="search" data-toggle="modal" data-target="#usersModal"
+          (click)="GetAllUsers()">
+      </div>
+      <div class="col-sm-3">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group">
+      <div class="col-sm-5"></div>
+      <div class="col-sm-1">
+        <input type="button" class="btn btn-primary" value="Update" (click)="UpdateTask(taskModel)" />
+      </div>
+      <div class="col-sm-1">
+        <input type="button" class="btn btn-secondary" value="Reset" />
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="usersModal" tabindex="-1" role="dialog" aria-labelledby="usersModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="usersModalLabel">Search</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div>
+            <input type="text" id="SearchUser" name="SearchUser" class="form-control" placeholder="search user"
+              #SearchUser (keyup)="FilterUsers(SearchUser.value)">
+          </div>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <td></td>
+              </tr>
+            </thead>
+            <tbody id="userTable">
+              <tr *ngFor="let user of users">
+                <td>{{ user.first_name }}</td>
+                <td>{{user.last_name}}</td>
+                <td><button type="button" data-dismiss="modal" (click)=SelectUser(user)>Select</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-labelledby="taskModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="taskModalLabel">Search Task</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div>
+            <input type="text" id="txtTask" name="txtTask" class="form-control" placeholder="search task" #txtTask
+              (keyup)="FilterParentTask(txtTask.value)">
+          </div>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Task</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="tblTasks">
+              <tr *ngFor="let task of parentTasks">
+                <td>{{ task.parent_task1 }}</td>
+                <td><button type="button" data-dismiss="modal" (click)="taskModel.parent_id==task.parent_id?RemoveTask(task):SelectTask(task)">{{taskModel.parent_id
+                    ==
+                    task.parent_id?'Remove':'Select'}}</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

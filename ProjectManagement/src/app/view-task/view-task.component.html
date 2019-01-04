@@ -1,0 +1,56 @@
+<form class="form-horizontal" method="post">
+  <div class="row">
+    <div class="form-group">
+      <div class="col-sm-6">
+        <input type="text" placeholder="Search" class="form-control" #search />
+      </div>
+      <div class="col-sm-1">
+        <input type="button" class="btn btn-secondary" value="search" (click)="FilterTask(search.value)" />
+      </div>
+      <div class="col-sm-1">
+        <label class="form-check-label col-sm">Sort By:</label>
+      </div>
+      <div class="col-sm-1">
+        <input type="button" class="btn btn-secondary" value="Start Date" (click)="SortByStartDate()" />
+      </div>
+      <div class="col-sm-1">
+        <input type="button" class="btn btn-secondary" value="End Date" (click)="SortByEndDate()" />
+      </div>
+      <div class="col-sm-1">
+        <input type="button" class="btn btn-secondary" value="Priority" (click)="SortByPriority()" />
+      </div>
+      <div class="col-sm-1">
+        <input type="button" class="btn btn-secondary" value="Completed" (click)="SortByStatus()" />
+      </div>
+    </div>
+  </div>
+  <hr class="hr-style" />
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Task</th>
+        <th>Parent</th>
+        <th>Priority</th>
+        <th>Start</th>
+        <th>End</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let task of tasks;index as i;first as f">
+      <tr>
+        <td>{{task.task1}}</td>
+        <td>{{task.parent_task!=NULL?task.parent_task.parent_task1:null}}</td>
+        <td>{{task.priority}}</td>
+        <td>{{task.start_date | date:'yyyy-MM-dd'}}</td>
+        <td>{{task.end_date | date:'yyyy-MM-dd'}}</td>
+        <td>
+          <input type="button" class="btn btn-primary" value="Edit" [disabled]="task.status=='completed'" (click)="EditTask(task)" />
+        </td>
+        <td>
+          <input type="button" class="btn btn-primary" value="End Task" [disabled]="task.status=='completed'" (click)="EndTask(task)" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</form>

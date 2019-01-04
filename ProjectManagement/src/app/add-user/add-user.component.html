@@ -1,0 +1,102 @@
+<form class="form-horizontal" method="post" #userForm="ngForm">
+  <div class="row">
+    <div class="form-group">
+      <label for="first_name" class="col-sm-2">First Name:</label>
+      <div class="col-sm-6">
+        <input type="text" name="first_name" id="first_name" #first_name="ngModel" required class="col-sm-4 form-control"
+          [(ngModel)]="UserModel.first_name" />
+        <div *ngIf="first_name.invalid && (first_name.dirty || first_name.touched)" class="alert alert-danger">
+          First Name is required
+        </div>
+      </div>
+      <div class="col-sm-4">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group">
+      <label for="last_name" class="col-sm-2">Last Name:</label>
+      <div class="col-sm-6">
+        <input type="text" name="last_name" #last_name="ngModel" id="last_name" class="col-sm-4 form-control" [(ngModel)]="UserModel.last_name"
+          required />
+          <div *ngIf="last_name.invalid && (last_name.dirty || last_name.touched)" class="alert alert-danger">
+            Last Name is required
+          </div>
+      </div>
+      <div class="col-sm-4">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group">
+      <label for="emp_id" class="col-sm-2">Employee Id:</label>
+      <div class="col-sm-4">
+        <input type="text" name="emp_id" #empId="ngModel" id="emp_id" class="col-sm-4 form-control" [(ngModel)]="UserModel.employee_id"
+          required />
+          <div *ngIf="empId.invalid && (empId.dirty || empId.touched)" class="alert alert-danger">
+            Employee ID is required
+          </div>
+      </div>
+      <div class="col-sm-6">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group">
+      <div class="col-sm-5"></div>
+      <div class="col-sm-1">
+        <button type="button" (click)="AddUser(UserModel)" [disabled]="userForm.invalid" class="btn btn-primary">{{AddButton}}</button>
+      </div>
+      <div class="col-sm-1">
+        <input type="button" class="btn btn-secondary" value="Reset" (click)="Reset()" />
+      </div>
+    </div>
+  </div>
+  <hr class="hr-style" />
+  <div class="row">
+    <div class="form-group">
+      <div class="col-sm-6">
+        <input type="text" placeholder="Search" class="form-control" #search (keyup)="FilterUsers(search.value)" />
+      </div>
+      <!-- <div class="col-sm-1">
+        <input type="button" class="btn btn-secondary" value="search">
+      </div>-->
+      <div class="col-sm-1">
+        <label class="form-check-label col-sm">Sort By:</label>
+      </div>
+      <div class="col-sm-1">
+        <input type="button" class="btn btn-secondary" value="First Name" (click)="SortByFirstName()" />
+      </div>
+      <div class="col-sm-1">
+        <input type="button" class="btn btn-secondary" value="Last Name" (click)="SortByLastName()" />
+      </div>
+      <div class="col-sm-1">
+        <input type="button" class="btn btn-secondary" value="Id" (click)="SortById()" />
+      </div>
+    </div>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Employee Id</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let user of users;index as i;first as f">
+      <tr>
+        <td>{{user.first_name}}</td>
+        <td>{{user.last_name}}</td>
+        <td>{{user.employee_id}}</td>
+        <td>
+          <input type="button" class="btn btn-primary" value="Edit" (click)="EditUser(user)" />
+        </td>
+        <td>
+          <input type="button" class="btn btn-primary" value="Delete" (click)="DeleteUser(user)" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</form>
