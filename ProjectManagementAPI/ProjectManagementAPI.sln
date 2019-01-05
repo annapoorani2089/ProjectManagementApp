@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectManagement.DAL", "Pr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectManagement.UnitTest", "ProjectManagement.UnitTest\ProjectManagement.UnitTest.csproj", "{921E6A3C-5238-4AD5-B5FF-CF7D696C97A0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectManagement.NBench", "ProjectManagement.NBench\ProjectManagement.NBench.csproj", "{61465C12-5770-40C6-97EF-A495E29203F0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{921E6A3C-5238-4AD5-B5FF-CF7D696C97A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{921E6A3C-5238-4AD5-B5FF-CF7D696C97A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{921E6A3C-5238-4AD5-B5FF-CF7D696C97A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61465C12-5770-40C6-97EF-A495E29203F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61465C12-5770-40C6-97EF-A495E29203F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61465C12-5770-40C6-97EF-A495E29203F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61465C12-5770-40C6-97EF-A495E29203F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -100,7 +100,7 @@ namespace ProjectManagement.UnitTest
             var controller = new TasksController();
             controller.Request = new HttpRequestMessage();
             controller.Configuration = new HttpConfiguration();
-            var response = controller.DeleteTask(5);
+            var response = controller.DeleteTask(6);
             var res = Task.FromResult(response);
             Assert.IsInstanceOf<OkNegotiatedContentResult<DAL.Task>>(response);
         }

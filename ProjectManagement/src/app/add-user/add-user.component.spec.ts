@@ -45,35 +45,8 @@ describe('AddUserComponent', () => {
     fixture.detectChanges();
     component.ngOnInit();
   });
-
-  it('check user details', () => {
-    const mgmtService = fixture.debugElement.injector.get(ManagementService);
-
-    const testUser: User[] = [
-      {
-        first_name: 'annapoorani',
-        last_name: 'R',
-        employee_id: 123,
-        user_id: 1,
-        Project: null,
-        Task: null,
-        deleted: false,
-        project_id: null,
-        task_id: null
-      }
-    ];
-    mgmtService.GetAllUser();
-    //expect(mgmtService.GetAllUser()).toBeTruthy();
-    const el = fixture.nativeElement.querySelector('tbody');
-    console.log(el);
-    //expect(component.GetAllUser()).toBeTruthy();
-    //  let users = component.users;
-    //expect(component.users.length).toBeGreaterThan(1);
-    //  expect(mgmtService.GetAllUser().subscribe((data) => data)).toEqual(component.GetAllUsers());
-
-    // let res = component.GetAllUsers();
-    //console.log(res=>res.find(x => x.user_id == 1).first_name);
-    //expect(res => res.find(x => x.user_id == 1).first_name).toBe(testUser.find(i => i.user_id == 1).first_name);
+  it('should create', () => {
+    expect(component).toBeTruthy();
   });
 
 });

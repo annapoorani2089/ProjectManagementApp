@@ -23,7 +23,6 @@ export class ManagementService {
       .map((response: Response) => response.json());
   }
   GetAllProject(): Observable<Project[]> {
-    console.log("yes")
     return this.http.get("http://localhost:50051/api/Projects")
       .map((response: Response) => response.json());
   }

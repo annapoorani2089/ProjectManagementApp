@@ -14,7 +14,7 @@ using System.Net;
 
 namespace ProjectManagement.UnitTest
 {
-    class UsersControllerTest : ApiController
+    public class UsersControllerTest : ApiController
     {
         [Test]
         public void GetUser()
@@ -77,7 +77,7 @@ namespace ProjectManagement.UnitTest
             var controller = new UsersController();
             controller.Request = new HttpRequestMessage();
             controller.Configuration = new HttpConfiguration();
-            var response = controller.Deleteuser(11);
+            var response = controller.Deleteuser(12);
             var res = Task.FromResult(response);
             Assert.IsInstanceOf<OkNegotiatedContentResult<DAL.user>>(response);
         }
